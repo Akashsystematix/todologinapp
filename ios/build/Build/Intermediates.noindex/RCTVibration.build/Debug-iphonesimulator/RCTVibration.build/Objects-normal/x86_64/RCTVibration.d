@@ -1,0 +1,5 @@
+dependencies: \
+  /Users/akash/todologinapp/node_modules/react-native/Libraries/Vibration/RCTVibration.m \
+  /Users/akash/todologinapp/node_modules/react-native/Libraries/Vibration/RCTVibration.h \
+  /Users/akash/todologinapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/akash/todologinapp/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h

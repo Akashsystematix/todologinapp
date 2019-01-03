@@ -1,0 +1,27 @@
+const React = require('react-native')
+import { Dimensions } from 'react-native';
+const { StyleSheet } = React
+let { width, height } = Dimensions.get('window')
+const constants = {
+  actionColor: '#1C246F'
+};
+
+var styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'rgb(160, 141, 211)',
+    flex: 1,
+  },
+  listview: {
+    flex: 1,
+  },
+  gradient: {
+    height: height,
+    width: width,
+    flex: 1,
+
+
+},
+})
+
+module.exports = styles
+module.exports.constants = constants;
