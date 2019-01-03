@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 import LinearGradient from 'react-native-linear-gradient';
+import ActionButton from '../SocialFeed/ActionButton';
 
 var snap = [];
 let { width, height } = Dimensions.get('window')
@@ -104,12 +105,10 @@ export default class TodoView extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <LinearGradient colors={['#0f0c29', '#302b63', '#24243e']} style={styles.gradient} >
+        <LinearGradient colors={['#E8CBC0', '#636FA4']} style={styles.gradient} >
 
           {/* <Button title='Add' onPress={this.addItem} /> */}
-          <Button style={styles.addbutton}
-            title='Add'
-            onPress={() => this.addItem()} />
+          
 
           <FlatList
             data={this.state.todos}
@@ -119,6 +118,9 @@ export default class TodoView extends Component {
 
           />
         </LinearGradient>
+        <ActionButton style={styles.addbutton}
+            title='Add'
+            onPress={() => this.addItem()}/>
       </View>
 
     );

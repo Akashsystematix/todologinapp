@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   actionText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight:'bold',
     textAlign: 'center',
   },
@@ -57,9 +57,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#1d2671',
     borderColor: 'transparent',
     borderWidth: 1,
-    paddingLeft: 16,
-    paddingTop: 14,
-    paddingBottom: 16,
+    padding:12,
+    justifyContent:'center'
   },
   eventsli: {
     backgroundColor: '#fff',

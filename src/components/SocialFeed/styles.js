@@ -8,7 +8,6 @@ const constants = {
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgb(160, 141, 211)',
     flex: 1,
   },
   listview: {

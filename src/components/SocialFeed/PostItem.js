@@ -42,7 +42,7 @@ export default class EventItem extends Component {
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgb(160, 141, 211)',
+    backgroundColor: 'transparent',
     flex: 1,
   },
   listview: {

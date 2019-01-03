@@ -64,6 +64,7 @@ const TabStack = TabNavigator(
 
             navigationOptions: {
                 tabBarLabel: "Profile",
+                title:"Profile",
                 tabBarIcon: ({ tintColor }) => (
                     <Icon name="person" size={30} color="#1D2571" />
                 )
@@ -99,7 +100,7 @@ const LoginStack = StackNavigator({
 }, {
         headerMode: 'float',
         navigationOptions: {
-            headerStyle: { backgroundColor: 'rgb(160, 141, 211)' },
+            headerStyle: { backgroundColor:'#664FA3' },
 
         }
     })
@@ -122,7 +123,7 @@ export default class AppNavigation extends Component {
 
     render() {
         return (
-            <LoginNav />
+            <LoginNav/>
         );
     }
 }

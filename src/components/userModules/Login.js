@@ -51,7 +51,7 @@ export default class Login extends Component {
         const { email, password } = this.state
         firebase
             .auth()
-            .signInWithEmailAndPassword(email, password)
+            .signInAndRetrieveDataWithEmailAndPassword(email, password)
             .then((userData) => {
                 this.setState({
                     loading: false
@@ -125,8 +125,8 @@ export default class Login extends Component {
                     </View>
 
                     <TouchableOpacity style={styles.buttonContainer}
-                         onPress={() => this.handleLogin()} >
-                         {/* onPress={() => this.loginNavigate()} > */}
+                         //onPress={() => this.handleLogin()} >
+                          onPress={() => this.loginNavigate()} >
                         <Text style={styles.buttonText}>SIGN IN</Text>
                     </TouchableOpacity>
 

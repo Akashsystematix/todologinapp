@@ -9,11 +9,12 @@ import {
     TextInput,
     TouchableOpacity, Dimensions
 } from 'react-native';
+import Icon from 'react-native-ionicons'
 import ImagePicker from 'react-native-customized-image-picker';
 import DatePicker from 'react-native-datepicker'
 import LinearGradient from 'react-native-linear-gradient';
 import { updateUser } from '../sevices/Itemservice';
-
+import ActionButton from '../SocialFeed/ActionButton';
 var snapuser = '';
 let { width, height } = Dimensions.get('window')
 
@@ -128,7 +129,7 @@ export default class UserProfileEdit extends Component {
 
                             <View style={styles.item}>
                                 <View style={styles.iconContent}>
-                                    <Text>Date of Birth:</Text>
+                                <Icon name="body"></Icon>
                                 </View>
                                 <View style={styles.infoContent}>
                                     <DatePicker
@@ -168,7 +169,7 @@ export default class UserProfileEdit extends Component {
 
                             <View style={styles.item}>
                                 <View style={styles.iconContent}>
-                                    <Text>Email:</Text>
+                                <Icon name="mail"></Icon>
                                 </View>
                                 <View style={styles.infoContent}>
 
@@ -184,7 +185,7 @@ export default class UserProfileEdit extends Component {
 
                             <View style={styles.item}>
                                 <View style={styles.iconContent}>
-                                    <Text>Number:</Text>
+                                <Icon name="calculator"></Icon>
 
                                 </View>
                                 <View style={styles.infoContent}>
@@ -203,17 +204,12 @@ export default class UserProfileEdit extends Component {
 
                                 </View>
                             </View>
-                            <View style={styles.container}>
-                                <TouchableOpacity style={styles.buttonContainer}
-
-                                    onPress={this.handleUpdate}
-
-                                >
-                                    <Text style={styles.buttonText}>SAVE</Text>
-                                </TouchableOpacity>
-                            </View>
+                            
                         </View>
                     </View>
+                    <ActionButton style={styles.buttonContainer}
+                                        title="SAVE"
+                                    onPress={this.handleUpdate}/>
                 </LinearGradient>
 
             </View>
@@ -222,7 +218,7 @@ export default class UserProfileEdit extends Component {
 }
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: "#004e92",
+        backgroundColor: "#DECCC9",
     },
     title: {
         color: '#f7c744',
@@ -268,7 +264,6 @@ const styles = StyleSheet.create({
     infoContent: {
         flex: 1,
         color:'white',
-        alignItems: 'center',
         flexDirection: 'column'
 
     },
