@@ -1,78 +1,67 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  SafeAreaView,
-  StatusBar,
-  TouchableOpacity, Dimensions
-} from 'react-native';
 import firebase from 'firebase';
+import React, {Component} from 'react';
+import {Dimensions, Image, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+
+import ActionButton from '../SocialFeed/ActionButton';
 
 var userdata = [];
 var snapuser = [];
-let { width, height } = Dimensions.get('window')
+let {width, height} = Dimensions.get('window')
 
 export default class UserProfileView extends Component {
   constructor(props) {
     super(props)
 
 
-    this.state = {
+        this.state = {
       users: []
     }
-
-
-
   }
   componentDidMount() {
-    firebase
-      .database().ref()
+    firebase.database()
+        .ref()
 
-      .child("users")
+        .child('users')
 
-      .on("value", snapshot => {
-        let data = snapshot.val();
-        let keys = Object.keys(data);
-        keys.forEach((key) => { console.log('Snapshotkeyuser=====>' + snapshot.key) });
-        snapuser = snapshot.key;
-        console.log('Snap' + snapuser);
-        if (data) {
-          this.setState(prevState => ({
-            users: [data, ...prevState.users]
+        .on('value', snapshot => {
+          let data = snapshot.val();
+          let keys = Object.keys(data);
+          keys.forEach(
+              (key) => {console.log('Snapshotkeyuser=====>' + snapshot.key)});
+          snapuser = snapshot.key;
+          console.log('Snap' + snapuser);
+          if (data) {
+            this.setState(prevState => ({
+                            users: [data, ...prevState.users]
 
-          }))
-        }
-        console.log('data' + JSON.stringify(data));
+                          }))
+          }
+          console.log('data' + JSON.stringify(data));
 
-        userdata = data;
-        console.log('userdata' + JSON.stringify(userdata));
-
-      });
+          userdata = data;
+          console.log('userdata' + JSON.stringify(userdata));
+        });
   }
 
 
 
+  handleLogout =
+      () => {
+        firebase.auth()
+            .signOut()
+            .then(() => this.props.navigation.navigate('Login'))
 
-  handleLogout = () => {
-
-    firebase
-      .auth().signOut()
-      .then(() => this.props.navigation.navigate('Login'))
-
-      .catch(error => this.setState({ errorMessage: error.message }))
-
-  }
+            .catch(error => this.setState({errorMessage: error.message}))
+      }
 
   render() {
     user = firebase.auth().currentUser;
     return (
       <SafeAreaView style={styles.container}>
-        <LinearGradient colors={['#000428', '#004e92']} style={styles.gradient} >
+        <LinearGradient colors={['#E8CBC0', '#636FA4']} style={styles.gradient} >
 
-          <StatusBar barStyle="light-content" />
+          <StatusBar barStyle='light-content'/>
           <View style={styles.container}>
 
 
@@ -82,7 +71,8 @@ export default class UserProfileView extends Component {
               </View>
               <View style={styles.headerContent}>
                 <Image style={styles.avatar}
-                  source={require('../resources/profile.png')} />
+                  source={
+      require('../resources/profile.png')} />
                 <Text>Name:</Text>
                 <Text value={this.state.name} style={styles.name}>{userdata.name}</Text>
 
@@ -127,31 +117,17 @@ export default class UserProfileView extends Component {
 
                 </View>
               </View>
-
-
-              <View style={styles.buttonContainer}>
-
-                <TouchableOpacity style={styles.buttonContainer}
-
-                  onPress={() => this.editProfileNavigate()}>
-
-                  <Text style={styles.buttonText}>EDIT</Text>
-
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.buttonContainer}
-
-                  onPress={() => this.handleLogout()}
-
-                >
-                  <Text style={styles.buttonText}>LOGOUT</Text>
-
-                </TouchableOpacity>
-
-              </View>
-
-            </View>
+ </View>
           </View>
+
+          <ActionButton onPress={() => this.editProfileNavigate()} 
+          title="EDIT"/>
+
+
+
+           <ActionButton title='LOGOUT'onPress={
+      () => this.handleLogout()}/>
+
         </LinearGradient>
       </SafeAreaView>
     )
@@ -180,7 +156,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.2)",
   },
   title: {
-    color: '#f7c744',
+    color: 'purple',
     fontSize: 18,
     textAlign: 'center',
     marginTop: 5,
@@ -237,23 +213,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     color: "#FFFFFF",
   },
-  buttonContainer: {
-
-    backgroundColor: '#f7c744',
-
-    padding: 10,
-
-    alignItems: 'center',
-
-  },
   container: {
     flex: 1,
     flexDirection: 'column',
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: 'rgb(32, 53, 70)',
-    fontWeight: 'bold',
-    fontSize: 13
   }
 });

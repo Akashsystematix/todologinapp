@@ -100,7 +100,7 @@ export default class UserProfileEdit extends Component {
 
         return (
             <View style={styles.container}>
-                <LinearGradient colors={['#000428', '#004e92']} style={styles.gradient} >
+              <LinearGradient colors={['#E8CBC0', '#636FA4']} style={styles.gradient} >
 
                     <StatusBar barStyle="light-content" />
                     <View style={styles.container}>

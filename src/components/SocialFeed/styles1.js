@@ -1,4 +1,5 @@
-import React, { StyleSheet, Dimensions, } from 'react-native';
+import React, {Dimensions, StyleSheet,} from 'react-native';
+
 const constants = {
   actionColor: '#1C246F'
 };
@@ -27,11 +28,7 @@ const styles = StyleSheet.create({
   liContainer: {
     flex: 2,
   },
-  liText: {
-    color: '#333',
-    fontSize: 16,
-    flex: 2
-  },
+  liText: {color: '#333', fontSize: 16, flex: 2},
   navbar: {
     alignItems: 'center',
     backgroundColor: '#fff',
@@ -42,11 +39,7 @@ const styles = StyleSheet.create({
     height: 44,
     flexDirection: 'row'
   },
-  navbarTitle: {
-    color: '#444',
-    fontSize: 16,
-    fontWeight: "500"
-  },
+  navbarTitle: {color: '#444', fontSize: 16, fontWeight: '500'},
   statusbar: {
     backgroundColor: '#fff',
     height: 22,
@@ -57,6 +50,7 @@ const styles = StyleSheet.create({
   actionText: {
     color: '#fff',
     fontSize: 16,
+    fontWeight:'bold',
     textAlign: 'center',
   },
   action: {
@@ -141,4 +135,3 @@ const styles = StyleSheet.create({
 
 module.exports = styles;
 module.exports.constants = constants;
-
