@@ -22,6 +22,7 @@ const TabStack = TabNavigator(
             screen: TodoView,
 
             navigationOptions: {
+                
                 tabBarLabel: "Home",
                 tabBarIcon: ({ tintColor }) => (
                     <Icon name="home" size={30} color="#1D2571" />
@@ -100,6 +101,7 @@ const LoginStack = StackNavigator({
         headerMode: 'screen',
         navigationOptions: {
             headerStyle: { backgroundColor:'#664FA3' },
+            
 
         }
     })
@@ -112,7 +114,7 @@ const LoginNav = StackNavigator({
         headerMode: 'none',
         title: 'Main',
         initialRouteName: 'loginStack',
-
+        
 
 
     })

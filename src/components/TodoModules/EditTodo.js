@@ -84,7 +84,7 @@ export default class EditTodo extends Component {
 
         return (
             <SafeAreaView style={styles.container}>
-                <LinearGradient colors={['#0f0c29', '#302b63', '#24243e']} style={styles.gradient} >
+                            <LinearGradient colors={['#FFEFBA', '#FFFFFF','#DBDBDB','#EAEAEA']} style={styles.gradient} >
 
                     <StatusBar barStyle="light-content" />
                     <KeyboardAvoidingView behavior='padding' style={styles.container}>
@@ -183,20 +183,25 @@ const styles = StyleSheet.create({
         // backgroundColor: 'red'
     },
     input: {
-        backgroundColor: 'rgba(255,255,255,0.2)',
+        backgroundColor: '#E5E8C6',
         color: 'black',
         fontSize: 20,
         fontWeight: "500",
-        marginTop: 10,
+       top: 150,
+       
 
 
     },
     dateInput: {
-        alignSelf: 'center', color: 'white',
+        alignSelf: 'center', color: 'black',
+        borderColor: '#E5E8C6',
+        backgroundColor:'#E5E8C6',
+        borderWidth: 1,
         width: width,
-        bottom:100,
-        backgroundColor:"grey"
-      },
+        bottom:60,
+        fontSize: 10,
+        marginTop: 10,
+    },
 
     titleText: {
         fontSize: 20,
@@ -211,13 +216,17 @@ const styles = StyleSheet.create({
     },baseText: {
         fontSize: 15,
         color: 'black',
+        height:100,
+        top:180,
         fontWeight: 'bold',
-        backgroundColor: 'rgba(255,255,255,0.2)',
+        backgroundColor: '#E5E8C6',
+
     },
+    
 
 
     buttonContainer: {
-        backgroundColor: '#f7c744',
+        backgroundColor: '#1D2571',
         paddingVertical: 10,
         left: 2,
         right: 2,
@@ -225,7 +234,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         textAlign: 'center',
-        color: 'rgb(32, 53, 70)',
+        color: 'white',
         fontWeight: 'bold',
         fontSize: 14
     }
