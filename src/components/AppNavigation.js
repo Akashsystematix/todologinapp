@@ -89,16 +89,15 @@ const TabStack = TabNavigator(
 )
 
 const LoginStack = StackNavigator({
-
     Login: { screen: Login },
     Register: { screen: Register },
-    UserProfileEdit: { screen: UserProfileEdit },
-    Details: { screen: Details },
     TabStack: { screen: TabStack },
+    Details: { screen: Details },
     EditTodo: { screen: EditTodo },
-    AddTodo: { screen: AddTodo }
+    AddTodo: { screen: AddTodo },
+    UserProfileEdit: { screen: UserProfileEdit },
 }, {
-        headerMode: 'float',
+        headerMode: 'screen',
         navigationOptions: {
             headerStyle: { backgroundColor:'#664FA3' },
 
@@ -107,8 +106,7 @@ const LoginStack = StackNavigator({
 
 const LoginNav = StackNavigator({
     loginStack: { screen: LoginStack },
-
-
+    
 }, {
 
         headerMode: 'none',

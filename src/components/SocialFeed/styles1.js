@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     borderWidth: 1,
     padding:12,
+    bottom:20,
     justifyContent:'center'
   },
   eventsli: {

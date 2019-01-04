@@ -10,30 +10,34 @@ let { width, height } = Dimensions.get('window')
 var snap = '';
 
 export default class Details extends Component {
+    static navigationOptions = {
+        title: 'Details',
+      };
 
 
     constructor(props) {
         super(props);
         this.state = {
-            titleText: "",
+            titleText: '',
             bodyText: '',
-            date: "",
+            date: '',
 
         };
         this.handleDelete = this.handleDelete.bind(this);
     }
     handleDelete() {
+
+        return firebase.database().ref('todos').child(snap).set(null);
         console.log("deleted" + snap);
 
-        return firebase.database().ref().child(item.key).remove();
     }
-    componentWillUnmount() {
+    // componentWillUnmount() {
 
-        snap.replace(null);
-        console.log('unmountcall' + snap);
+    //     snap.replace(null);
+    //     console.log('unmountcall' + snap);
 
 
-    }
+    // }
 
     render() {
         const { navigation } = this.props;
@@ -49,7 +53,7 @@ export default class Details extends Component {
 
         return (
             <SafeAreaView style={styles.container}>
-                            <LinearGradient colors={['#F7F8F8', '#799F0C', '#FFE000']} style={styles.gradient} >
+                            <LinearGradient colors={['#FFEFBA', '#FFFFFF']} style={styles.gradient} >
 
                 <StatusBar barStyle="light-content" />
                 <KeyboardAvoidingView behavior='padding' style={styles.container}>
@@ -120,7 +124,7 @@ export default class Details extends Component {
 
     editItem(title, data, date) {
 
-        this.props.navigation.navigate('EditTodo', { title: title, data: data, date: date }
+        this.props.navigation.navigate('EditTodo', { title: title, data: data, date: date,snap }
 
         )
 
@@ -168,7 +172,7 @@ const styles = StyleSheet.create({
 
 
     buttonContainer: {
-        backgroundColor: '#00416A',
+        backgroundColor: '#1D2571',
         paddingVertical: 10,
         left: 0,
         right: 0,

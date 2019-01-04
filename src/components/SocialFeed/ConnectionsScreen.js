@@ -67,6 +67,8 @@ export default class ConnectionsScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    top:'3%'
+
   },
   listview: {
     flex: 1,

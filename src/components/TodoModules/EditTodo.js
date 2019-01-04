@@ -5,23 +5,28 @@ import {
     TextInput, SafeAreaView, TouchableOpacity, Dimensions,
     KeyboardAvoidingView
 } from 'react-native'
+import firebase from 'firebase'
 import DatePicker from 'react-native-datepicker'
-import { editItem } from '../sevices/Itemservice';
+//import { editItem } from '../sevices/Itemservice';
 import LinearGradient from 'react-native-linear-gradient';
 let { width, height } = Dimensions.get('window')
 
+var title;
+var data;
+var date;
+var snap=[];
 export default class EditTodo extends Component {
     static navigationOptions = {
         title: "EditTodo"
     };
 
-
+    
     constructor(props) {
         super(props)
         this.state = {
-            title: '',
-            data: '',
-            date: ''
+            title:JSON.stringify(title),
+            data: JSON.stringify(data),
+            date: JSON.stringify(date)
 
         }
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -54,10 +59,15 @@ export default class EditTodo extends Component {
             data: this.state.data,
             date: this.state.date
         }
-        editItem(items);
+        this.editItem(items);
     }
 
-
+   editItem = (items) => {
+      firebase.database().ref('todos').child(snap)
+          .set(items)
+          .then(() => this.props.navigation.navigate('TabStack'))
+          .catch((error) => {console.log('error ', error)});
+    }
 
 
 
@@ -65,10 +75,11 @@ export default class EditTodo extends Component {
 
 
         const { navigation } = this.props;
-        const title = navigation.getParam('title');
-        const data = navigation.getParam('data');
-        const date = navigation.getParam('date');
-
+        title = navigation.getParam('title');
+         data = navigation.getParam('data');
+         date = navigation.getParam('date');
+         snap = navigation.getParam('snap');
+         console.log("snapfoundedit" + snap);
 
 
         return (
@@ -86,18 +97,9 @@ export default class EditTodo extends Component {
                                 returnKeyType='next'
                                 autoCorrect={true}
                                 onChange={this.handleChangeTitle}
-
-                                numberOfLines={1}>
-
-
-                                {JSON.stringify(title)}
-
-                            </TextInput>
-
-
-
-
-                            <TextInput numberOfLines={20}
+                                numberOfLines={1}/>
+                           
+                              <TextInput numberOfLines={20}
                                 value={this.state.data}
 
                                 style={styles.baseText}
@@ -105,13 +107,8 @@ export default class EditTodo extends Component {
                                 keyboardType='default'
                                 returnKeyType='next'
                                 autoCorrect={true}
-                                onChange={this.handleChangeData}>
-                                {JSON.stringify(data)}
-                            </TextInput>
-
-
-                            
-                        </View>
+                                onChange={this.handleChangeData}/> 
+                                </View>
 
 
 
@@ -145,7 +142,7 @@ export default class EditTodo extends Component {
                                     // ... You can check the source to find the other keys.
                                 }}
                                 onDateChange={(date) => { this.setState({ date: date }) }}
-                            >{JSON.stringify(date)}</DatePicker>
+                           />
                     <TouchableOpacity style={styles.buttonContainer}
                         onPress={this.handleSubmit}
                     >

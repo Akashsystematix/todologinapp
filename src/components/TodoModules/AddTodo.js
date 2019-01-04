@@ -8,13 +8,15 @@ import {
 import DatePicker from 'react-native-datepicker'
 import LinearGradient from 'react-native-linear-gradient';
 let { width, height } = Dimensions.get('window')
-import { addItem } from '../sevices/Itemservice';
+// import { addItem } from '../sevices/Itemservice';
+import firebase from 'firebase';
 
 
 
 export default class AddTodo extends Component {
     static navigationOptions = {
         title: "Add Notes"
+        
     };
 
 
@@ -56,20 +58,19 @@ export default class AddTodo extends Component {
             data: this.state.data,
             date: this.state.date
         }
-        addItem(items);
+        this.addItem(items);
     }
-
+    addItem =(items) => {
+      var database = firebase.database().ref('todos').push(items).then(
+          () => this.props.navigation.navigate('TabStack'))
+      console.log('databaseadded' + database);
+    }
 
 
 
 
     render() {
 
-
-        const { navigation } = this.props;
-        const title = navigation.getParam('title');
-        const data = navigation.getParam('data');
-        const date = navigation.getParam('date');
 
 
 
@@ -93,7 +94,6 @@ export default class AddTodo extends Component {
                                 numberOfLines={1}>
 
 
-                                {JSON.stringify(title)}
 
                             </TextInput>
 
@@ -107,7 +107,6 @@ export default class AddTodo extends Component {
                                 returnKeyType='next'
                                 autoCorrect={true}
                                 onChange={this.handleChangeData}>
-                                {JSON.stringify(data)}
                             </TextInput>
 
 
@@ -140,7 +139,7 @@ export default class AddTodo extends Component {
                                     // ... You can check the source to find the other keys.
                                 }}
                                 onDateChange={(date) => { this.setState({ date: date }) }}
-                            >{JSON.stringify(date)}</DatePicker>
+                            />
 
                     <TouchableOpacity style={styles.buttonContainer}
                         onPress={this.handleSubmit}
@@ -149,7 +148,7 @@ export default class AddTodo extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.buttonContainer}
-                        onPress={() => this.props.navigation.navigate('Details')}
+                        onPress={() => this.props.navigation.navigate('TodoView')}
                     >
                         <Text style={styles.buttonText}>CANCEL</Text>
                     </TouchableOpacity>

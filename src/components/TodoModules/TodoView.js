@@ -10,8 +10,14 @@ import ActionButton from '../SocialFeed/ActionButton';
 
 var snap = [];
 let { width, height } = Dimensions.get('window')
+
+
+
 export default class TodoView extends Component {
-  
+  static navigationOptions = {
+    header: null,
+    
+};
 
 
   constructor(props) {
@@ -37,7 +43,7 @@ export default class TodoView extends Component {
       return (
         <TouchableHighlight onPress={() => this.detailsItem(item.title, item.data, item.date, snap)}
         >
-          <View style={{ flex: 1, backgroundColor: 'white'}}>
+          <View style={{ flex: 1, backgroundColor: '#FFEFBA'}}>
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.baseText}>{item.data}</Text>
             <Text style={styles.date}>{item.date}</Text>
@@ -119,9 +125,10 @@ export default class TodoView extends Component {
           />
         </LinearGradient>
         <ActionButton style={styles.addbutton}
-            title='Add'
-            onPress={() => this.addItem()}/>
+      title='Add'
+      onPress={() => this.addItem()}/>
       </View>
+      
 
     );
   }
@@ -145,15 +152,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     flexDirection: 'column',
+    top:'4%',
+   
+
   },
   baseText: {
     fontFamily: 'Courier',
     fontSize:15,
+    padding:10
 },
   title: {
     color: '#3b8d99',
-    fontSize: 18,
-    
+    fontSize: 16,
+    padding:10,
     opacity: 1,
     fontFamily:"Cochin-Bold"
 
