@@ -16,9 +16,6 @@ let { width, height } = Dimensions.get('window')
 export default class TodoView extends Component {
   static navigationOptions = ({navigation})=> {
 return{
-headerLeft: null,
-style: { shadowColor: 'transparent' },
-gesturesEnabled: false,
 header:null,
 }
 };

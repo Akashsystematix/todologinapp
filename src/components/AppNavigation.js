@@ -1,46 +1,47 @@
-import React, { Component } from 'react'
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import React, {Component} from 'react'
+import Icon from 'react-native-ionicons';
+import {createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
+
+import ConnectionsScreen from './SocialFeed/ConnectionsScreen';
+import EventsScreen from './SocialFeed/EventsScreen';
+import SocialFeed from './SocialFeed/SocialFeed';
+import AddTodo from './TodoModules/AddTodo'
+import Details from './TodoModules/Details'
+import EditTodo from './TodoModules/EditTodo'
+import TodoView from './TodoModules/TodoView'
 import Login from './userModules/Login'
 import Register from './userModules/Register'
-import Details from './TodoModules/Details'
-import TodoView from './TodoModules/TodoView'
-import AddTodo from './TodoModules/AddTodo'
-import UserProfileView from './userModules/UserProfileView'
 import UserProfileEdit from './userModules/UserProfileEdit'
-import EditTodo from './TodoModules/EditTodo'
-import SocialFeed from './SocialFeed/SocialFeed';
-import EventsScreen from './SocialFeed/EventsScreen';
-import ConnectionsScreen from './SocialFeed/ConnectionsScreen';
-import Icon from 'react-native-ionicons';
+import UserProfileView from './userModules/UserProfileView'
 
 
 
-const TabStack = TabNavigator(
+const TabStack = createBottomTabNavigator(
 
     {
-        TodoView: {
-            screen: TodoView,
-
-            navigationOptions: {
-                
-                tabBarLabel: "Home",
-                tabBarIcon: ({ tintColor }) => (
-                    <Icon name="home" size={30} color="#1D2571" />
-                )
-            },
+      TodoView: {
+        screen: TodoView,
+        navigationOptions: {
+            tabBarLabel: "Home",
+            tabBarIcon: ({ tintColor }) => (
+                <Icon name="home" size={30} color="#1D2571" />
+            )
         },
-        SocialFeed: {
-            screen: SocialFeed,
-            navigationOptions: {
-                tabBarLabel: "SocialFeed",
-                tabBarIcon: ({ tintColor }) => (
-                    <Icon name="people" size={30} color="#1D2571" />
-                )
-            }
-        },
+    
+    },
+      SocialFeed: {
+          screen : SocialFeed, navigationOptions: {
+            tabBarLabel: "SocialFeed",
+            tabBarIcon: ({ tintColor }) => (
+                <Icon name="people" size={30} color="#1D2571" />
+            )
+        }
 
-        EventsScreen: {
-            screen: EventsScreen,
+      },
+
+      EventsScreen: {
+        screen: EventsScreen
+        ,
 
             navigationOptions: {
                 tabBarLabel: "Events",
@@ -48,10 +49,12 @@ const TabStack = TabNavigator(
                     <Icon name="list" size={30} color="#1D2571" />
                 )
             },
-        },
 
-        ConnectionsScreen: {
-            screen: ConnectionsScreen,
+
+      },
+
+      ConnectionsScreen: {
+        screen: ConnectionsScreen,
 
             navigationOptions: {
                 tabBarLabel: "Contacts",
@@ -59,71 +62,66 @@ const TabStack = TabNavigator(
                     <Icon name="contacts" size={30} color="#1D2571" />
                 )
             },
-        },
-        UserProfileView: {
-            screen: UserProfileView,
 
-            navigationOptions: {
-                tabBarLabel: "Profile",
-                title:"Profile",
-                tabBarIcon: ({ tintColor }) => (
-                    <Icon name="person" size={30} color="#1D2571" />
-                )
-            },
+
+      },
+      UserProfileView: {
+        screen: UserProfileView,
+        navigationOptions: {
+            tabBarLabel: "Profile",
+            tabBarIcon: ({ tintColor }) => (
+                <Icon name="person" size={30} color="#1D2571" />
+            )
         },
+
+
+      },
 
     },
-
     {
-        tabBarOptions: {
-            activeTintColor: '#8F2571',
-            inactiveTintColor: 'gray',
-            style: {
-                backgroundColor: 'white',
-            }
-        },
+      navigationOptions: ({navigation}) => {
+       
+
+        const {routeName} = navigation.state.routes[navigation.state.index];
+        return {headerTitle: routeName};
+      },
     },
-
-
-
-
+    {
+      tabBarOptions: {
+        activeTintColor: '#8F2571',
+        inactiveTintColor: 'gray',
+        style: {
+          backgroundColor: 'black',
+        }
+      },
+    },
 )
 
-const LoginStack = StackNavigator({
-    Login: { screen: Login },
-    Register: { screen: Register },
-    TabStack: { screen: TabStack },
-    Details: { screen: Details },
-    EditTodo: { screen: EditTodo },
-    AddTodo: { screen: AddTodo },
-    UserProfileEdit: { screen: UserProfileEdit },
-}, {
-        headerMode: 'screen',
-        navigationOptions: {
-            headerStyle: { backgroundColor:'#664FA3' },
-            
 
-        }
+
+const LoginStack = createStackNavigator(
+    {
+      Login: {screen: Login},
+      TabStack: {screen: TabStack},
+      Details: {screen: Details},
+      EditTodo: {screen: EditTodo},
+      AddTodo: {screen: AddTodo},
+      Register: {screen: Register},
+      UserProfileEdit: {screen: UserProfileEdit},
+    },
+    {
+      
+      defaultnavigationOptions: {
+        headerStyle: {backgroundColor: 'blue'},
+     }
     })
 
-const LoginNav = StackNavigator({
-    loginStack: { screen: LoginStack },
-    
-}, {
 
-        headerMode: 'none',
-        title: 'Main',
-        initialRouteName: 'loginStack',
-        
+const AppContainer = createAppContainer(LoginStack);
 
-
-    })
 
 export default class AppNavigation extends Component {
-
-    render() {
-        return (
-            <LoginNav/>
-        );
-    }
+  render() {
+    return (<AppContainer/>);
+  }
 }
