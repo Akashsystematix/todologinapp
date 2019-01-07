@@ -7,6 +7,8 @@ import {
 import firebase from 'firebase';
 import LinearGradient from 'react-native-linear-gradient';
 import ActionButton from '../SocialFeed/ActionButton';
+import { FluidNavigator, Transition } from 'react-navigation-fluid-transitions';
+import Details from './Details';
 
 var snap = [];
 let { width, height } = Dimensions.get('window')
@@ -14,10 +16,13 @@ let { width, height } = Dimensions.get('window')
 
 
 export default class TodoView extends Component {
-  static navigationOptions = ({navigation})=> {
-return{
-header:null,
+  static navigationOptions = {
+headerStyle:{
+backgroundColor:'#CDB8BA'
+
+
 }
+
 };
 
 
@@ -146,7 +151,12 @@ header:null,
     snap = '';
   }
 }
+const todoNavi=FluidNavigator({
 
+Details:{screen :Details}
+
+
+});
 
 const styles = StyleSheet.create({
   container: {

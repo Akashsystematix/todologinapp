@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Icon from 'react-native-ionicons';
 import {createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
-
 import ConnectionsScreen from './SocialFeed/ConnectionsScreen';
 import EventsScreen from './SocialFeed/EventsScreen';
 import SocialFeed from './SocialFeed/SocialFeed';
@@ -78,20 +77,13 @@ const TabStack = createBottomTabNavigator(
       },
 
     },
-    {
-      navigationOptions: ({navigation}) => {
-       
-
-        const {routeName} = navigation.state.routes[navigation.state.index];
-        return {headerTitle: routeName};
-      },
-    },
+    
     {
       tabBarOptions: {
         activeTintColor: '#8F2571',
-        inactiveTintColor: 'gray',
+        inactiveTintColor: 'grey',
         style: {
-          backgroundColor: 'black',
+          backgroundColor: '#FFFFFD',
         }
       },
     },
@@ -99,7 +91,7 @@ const TabStack = createBottomTabNavigator(
 
 
 
-const LoginStack = createStackNavigator(
+const LoginStack =createStackNavigator(
     {
       Login: {screen: Login},
       TabStack: {screen: TabStack},
@@ -111,10 +103,13 @@ const LoginStack = createStackNavigator(
     },
     {
       
-      defaultnavigationOptions: {
-        headerStyle: {backgroundColor: 'blue'},
+      defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: '#664EA3'
+        
+        }
      }
-    })
+    });
 
 
 const AppContainer = createAppContainer(LoginStack);
