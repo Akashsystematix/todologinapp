@@ -13,7 +13,7 @@ import Details from './Details';
 var snap = [];
 let { width, height } = Dimensions.get('window')
 
-
+var userData='';
 
 export default class TodoView extends Component {
   static navigationOptions = {
@@ -76,8 +76,15 @@ backgroundColor:'#CDB8BA'
   }
 
   componentWillMount() {
+if(userData==null){
 
-    const userData = firebase.auth().currentUser;
+userData=user;
+uid=userData.uid;
+
+}
+else{
+    userData = firebase.auth().currentUser;
+    uid=firebase.auth().currentUser.uid;
     AsyncStorage.getItem('userData').then((user_data_json) => {
       let userData = JSON.parse(user_data_json);
       this.setState({
@@ -86,12 +93,19 @@ backgroundColor:'#CDB8BA'
       });
     });
   }
+}
 
 
 
   componentDidMount() {
-    const UID = firebase.auth().currentUser.uid;
+    debugger
 
+   if(userData!=null){
+    var UID = userData.uid;
+
+   }else{
+    var UID = firebase.auth().currentUser.uid;
+   }
     firebase
       .database().ref('todos')
       .child(`todos/${UID}`)
@@ -117,6 +131,13 @@ backgroundColor:'#CDB8BA'
 
 
   render() {
+
+
+    const { navigation } = this.props;
+    const user = navigation.getParam('user');
+
+
+
     return (
       <View style={styles.container}>
         <LinearGradient colors={['#E8CBC0', '#636FA4']} style={styles.gradient} >

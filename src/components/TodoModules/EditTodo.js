@@ -65,10 +65,8 @@ export default class EditTodo extends Component {
    editItem = (items) => {
     const UID = firebase.auth().currentUser.uid;
       const todoRef=firebase.database().ref('todos').child(`todos/${UID}/${snap}`);
-      let updates = {};
-      updates[items] = value;
-
-      todoRef.update(updates)
+     
+      todoRef.update(items)
 
           .then(() => this.props.navigation.navigate('TabStack'))
           .catch((error) => {console.log('error ', error)});
@@ -233,8 +231,8 @@ const styles = StyleSheet.create({
     buttonContainer: {
         backgroundColor: '#1D2571',
         paddingVertical: 10,
-        left: 2,
-        right: 2,
+        left: 0,
+        right: 0,
         bottom: 0
     },
     buttonText: {

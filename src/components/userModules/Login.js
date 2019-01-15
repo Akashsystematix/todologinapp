@@ -57,7 +57,7 @@ export default class Login extends Component {
                     loading: false
                 });
                 AsyncStorage.setItem('userData', JSON.stringify(userData));
-                console.log("userData" + JSON.stringify(userData));
+                console.log("userData=====>" + JSON.stringify(userData));
                 this.props.navigation.navigate("TodoView");
             }
             ).catch(error => this.setState({ errorMessage: error.message }))

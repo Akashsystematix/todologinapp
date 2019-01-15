@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Icon from 'react-native-ionicons';
-import {createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
+import {createAppContainer, createBottomTabNavigator,createSwitchNavigator ,createStackNavigator} from 'react-navigation';
 import ConnectionsScreen from './SocialFeed/ConnectionsScreen';
 import EventsScreen from './SocialFeed/EventsScreen';
 import SocialFeed from './SocialFeed/SocialFeed';
@@ -12,7 +12,8 @@ import Login from './userModules/Login'
 import Register from './userModules/Register'
 import UserProfileEdit from './userModules/UserProfileEdit'
 import UserProfileView from './userModules/UserProfileView'
-
+import AuthLoadingScreen from './AuthLoadingScreen'
+import { AsyncStorage } from 'react-native'
 
 
 const TabStack = createBottomTabNavigator(
@@ -77,6 +78,14 @@ const TabStack = createBottomTabNavigator(
       },
 
     },
+    {
+        navigationOptions: ({ navigation }) => {
+          const { routeName } = navigation.state.routes[navigation.state.index];
+          return {
+            headerTitle: routeName
+          };
+        }
+      },
     
     {
       tabBarOptions: {
@@ -91,32 +100,67 @@ const TabStack = createBottomTabNavigator(
 
 
 
-const LoginStack =createStackNavigator(
+const AppStack =createStackNavigator(
     {
-      Login: {screen: Login},
-      TabStack: {screen: TabStack},
+    TabStack: {screen: TabStack},
       Details: {screen: Details},
       EditTodo: {screen: EditTodo},
       AddTodo: {screen: AddTodo},
       Register: {screen: Register},
       UserProfileEdit: {screen: UserProfileEdit},
     },
+    
     {
-      
       defaultNavigationOptions: {
         headerStyle: {
             backgroundColor: '#664EA3'
         
         }
      }
-    });
+    }
+    
+    
+    );
+    const AuthStack =createStackNavigator(
+        {
+          Login: {screen: Login},          
+        },
+        
+        {
+          defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#664EA3'
+            
+            }
+         }
+        }
+        
+        
+        );
 
 
-const AppContainer = createAppContainer(LoginStack);
+
+
+const AppContainer = createAppContainer(createSwitchNavigator(
+    {
+
+        AuthLoadingScreen:AuthLoadingScreen,
+        AppStack: AppStack,
+        AuthStack: AuthStack,
+    },
+    {
+ 
+        initialRouteName: 'AuthLoadingScreen',
+    }
+  ));
 
 
 export default class AppNavigation extends Component {
+
+
   render() {
+
+    
     return (<AppContainer/>);
   }
 }
