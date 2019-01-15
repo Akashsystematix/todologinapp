@@ -63,8 +63,13 @@ export default class EditTodo extends Component {
     }
 
    editItem = (items) => {
-      firebase.database().ref('todos').child(snap)
-          .set(items)
+    const UID = firebase.auth().currentUser.uid;
+      const todoRef=firebase.database().ref('todos').child(`todos/${UID}/${snap}`);
+      let updates = {};
+      updates[items] = value;
+
+      todoRef.update(updates)
+
           .then(() => this.props.navigation.navigate('TabStack'))
           .catch((error) => {console.log('error ', error)});
     }

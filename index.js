@@ -6,8 +6,28 @@ import Splash from './src/components/userModules/Splash'
 import Register from './src/components/userModules/Register'
 import Details from './src/components/TodoModules/Details'
 import App from './src/components/App'
+import configureStore from './src/store/configureStore';
+import {Provider} from 'react-redux';
 
-import TodoView from './src/components/TodoModules/TodoView'
-import AppNavigation from './src/components/AppNavigation';
 
+const store = configureStore();
+
+
+
+
+
+
+class todo extends Component {
+    componentDidMount() {
+      codePush.sync({installMode: codePush.InstallMode.IMMEDIATE});
+    }
+  
+    render() {
+      return (
+        <Provider store={store}>
+          <App/>
+        </Provider>
+      );
+    }
+  }
 AppRegistry.registerComponent('todologinapp', () => App)

@@ -26,6 +26,10 @@
     "react-navigation": "^3.0.9",
     "react-navigation-fluid-transitions": "^0.2.74",
     "react-navigation-material-bottom-tabs": "^1.0.0",
+    "react-redux": "^6.0.0",
+    "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
+    "redux-thunk": "^2.3.0",
     "rsvp": "^4.8.4"
   },
   "devDependencies": {

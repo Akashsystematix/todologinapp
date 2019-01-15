@@ -90,9 +90,11 @@ backgroundColor:'#CDB8BA'
 
 
   componentDidMount() {
+    const UID = firebase.auth().currentUser.uid;
+
     firebase
-      .database().ref()
-      .child("todos")
+      .database().ref('todos')
+      .child(`todos/${UID}`)
 
       .on("child_added", snapshot => {
         let data = snapshot.val();

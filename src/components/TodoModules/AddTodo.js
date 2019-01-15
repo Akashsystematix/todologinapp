@@ -60,10 +60,13 @@ export default class AddTodo extends Component {
         }
         this.addItem(items);
     }
+    
     addItem =(items) => {
-      var database = firebase.database().ref('todos').push(items).then(
+        const UID=firebase.auth().currentUser.uid;
+      var database = firebase.database().ref('todos').child(`todos/${UID}`).push(items).then(
           () => this.props.navigation.navigate('TabStack'))
       console.log('databaseadded' + database);
+      
     }
 
 
