@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     },
 
     buttonContainer: {
-        backgroundColor: '#1D2571',
+        backgroundColor: '#646FA4',
         paddingVertical: 10,
         bottom: 0
     }, gradient: {

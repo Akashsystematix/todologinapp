@@ -1,11 +1,10 @@
 import React, {Dimensions, StyleSheet,} from 'react-native';
-
 const constants = {
-  actionColor: '#1C246F'
+  actionColor: 'transparent'
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1D2571',
+    backgroundColor: '#6B3DE9',
     flex: 1,
   },
   listview: {
@@ -54,12 +53,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   action: {
-    backgroundColor: '#1d2671',
+    backgroundColor: '#6973A5',
     borderColor: 'transparent',
     borderWidth: 1,
-    padding:12,
-    bottom:20,
+    
+    
     justifyContent:'center'
+  },
+
+  linearGradient: {
+padding: 15,
+borderRadius: 5
   },
   eventsli: {
     backgroundColor: '#fff',
@@ -117,7 +121,7 @@ const styles = StyleSheet.create({
     borderRadius: 40
   },
   connectionsli: {
-    backgroundColor: '#1d2671',
+    backgroundColor: 'transparent',
     borderBottomColor: '#fff',
     borderTopColor: '#fff',
     borderColor: 'transparent',

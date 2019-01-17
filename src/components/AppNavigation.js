@@ -24,7 +24,7 @@ const TabStack = createBottomTabNavigator(
         navigationOptions: {
             tabBarLabel: "Home",
             tabBarIcon: ({ tintColor }) => (
-                <Icon name="home" size={30} color="#1D2571" />
+                <Icon name="home" size={30} color="#6B2E93" />
             )
         },
     
@@ -33,7 +33,7 @@ const TabStack = createBottomTabNavigator(
           screen : SocialFeed, navigationOptions: {
             tabBarLabel: "SocialFeed",
             tabBarIcon: ({ tintColor }) => (
-                <Icon name="people" size={30} color="#1D2571" />
+                <Icon name="people" size={30} color="#6B2E93" />
             )
         }
 
@@ -46,7 +46,7 @@ const TabStack = createBottomTabNavigator(
             navigationOptions: {
                 tabBarLabel: "Events",
                 tabBarIcon: ({ tintColor }) => (
-                    <Icon name="list" size={30} color="#1D2571" />
+                    <Icon name="list" size={30} color="#6B2E93" />
                 )
             },
 
@@ -59,7 +59,7 @@ const TabStack = createBottomTabNavigator(
             navigationOptions: {
                 tabBarLabel: "Contacts",
                 tabBarIcon: ({ tintColor }) => (
-                    <Icon name="contacts" size={30} color="#1D2571" />
+                    <Icon name="contacts" size={30} color="#6B2E93" />
                 )
             },
 
@@ -70,7 +70,7 @@ const TabStack = createBottomTabNavigator(
         navigationOptions: {
             tabBarLabel: "Profile",
             tabBarIcon: ({ tintColor }) => (
-                <Icon name="person" size={30} color="#1D2571" />
+                <Icon name="person" size={30} color="#6B2E93" />
             )
         },
 
@@ -106,14 +106,13 @@ const AppStack =createStackNavigator(
       Details: {screen: Details},
       EditTodo: {screen: EditTodo},
       AddTodo: {screen: AddTodo},
-      Register: {screen: Register},
       UserProfileEdit: {screen: UserProfileEdit},
     },
     
     {
       defaultNavigationOptions: {
         headerStyle: {
-            backgroundColor: '#664EA3'
+            backgroundColor: '#E8CBC0'
         
         }
      }
@@ -123,7 +122,9 @@ const AppStack =createStackNavigator(
     );
     const AuthStack =createStackNavigator(
         {
-          Login: {screen: Login},          
+          Login: {screen: Login}, 
+          Register: {screen: Register},
+         
         },
         
         {

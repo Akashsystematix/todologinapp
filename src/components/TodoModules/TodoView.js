@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet, Text, View, TouchableHighlight,
   FlatList, AsyncStorage,
-  Button, ScrollView, Dimensions,
+  Button, ScrollView, Dimensions,SafeAreaView
 } from 'react-native';
 import firebase from 'firebase';
 import LinearGradient from 'react-native-linear-gradient';
@@ -49,7 +49,7 @@ backgroundColor:'#CDB8BA'
       return (
         <TouchableHighlight onPress={() => this.detailsItem(item.title, item.data, item.date, snap)}
         >
-          <View style={{ flex: 1, backgroundColor: '#FFEFBA'}}>
+          <View style={styles.list}>
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.baseText}>{item.data}</Text>
             <Text style={styles.date}>{item.date}</Text>
@@ -139,13 +139,13 @@ else{
 
 
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <LinearGradient colors={['#E8CBC0', '#636FA4']} style={styles.gradient} >
 
           {/* <Button title='Add' onPress={this.addItem} /> */}
           
 
-          <FlatList
+          <FlatList style={styles.flatlist}
             data={this.state.todos}
             renderItem={this.renderItem}
             keyExtractor={(item, index) => index}
@@ -156,7 +156,7 @@ else{
         <ActionButton style={styles.addbutton}
       title='Add'
       onPress={() => this.addItem()}/>
-      </View>
+      </SafeAreaView>
       
 
     );
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     flexDirection: 'column',
-    top:'4%',
+    
    
 
   },
@@ -209,6 +209,18 @@ const styles = StyleSheet.create({
     left:width-70,
     opacity: 1,
     fontFamily:"Optima"
+
+  },
+  list:{
+    flex: 1,
+     backgroundColor: '#FFEFBA',
+     borderRadius:6
+
+
+  },
+  flatlist:{
+    
+
 
   },
   gradient: {
@@ -236,10 +248,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10
   },
-  buttonContainer: {
-    backgroundColor: '#f7c744',
-    paddingVertical: 10
-  },
+  
   buttonText: {
     textAlign: 'center',
     color: 'rgb(32, 53, 70)',

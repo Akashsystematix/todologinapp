@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: 'rgba(255,255,255,0.2)',
-        borderColor: '#1D2571',
+        borderColor: '#646FA4',
         borderWidth: 1,
         color: 'purple',
         fontSize: 20,
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
     },
 
     buttonContainer: {
-        backgroundColor: '#1D2571',
+        backgroundColor: 'transparent',
         paddingVertical: 10,
         left: 0,
         right: 0,

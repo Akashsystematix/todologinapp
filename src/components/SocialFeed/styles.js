@@ -9,7 +9,6 @@ const constants = {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: '4%',
     justifyContent: 'center',
 
   },

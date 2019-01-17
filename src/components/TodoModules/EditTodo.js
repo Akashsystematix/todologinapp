@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
 
 
     buttonContainer: {
-        backgroundColor: '#1D2571',
+        backgroundColor: '#646FA4',
         paddingVertical: 10,
         left: 0,
         right: 0,

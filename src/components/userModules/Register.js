@@ -94,13 +94,9 @@ export default class Register extends Component {
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(() => this.props.navigation.navigate('Login'))
             .catch(error => this.setState({ errorMessage: error.message }))
-        user = firebase.auth().currentUser.uid;
-        console.log("usersignup" + JSON.stringify(user))
+             console.log("usersignup" + JSON.stringify(user))
 
     }
-
-
-
 
     validate(text, type) {
         alph = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -270,7 +266,7 @@ const styles = StyleSheet.create({
 
     },
     buttonContainer: {
-        backgroundColor: '#1D2571',
+        backgroundColor: '#646FA4',
         paddingVertical: 10,
         left: 0,
         right: 0,
