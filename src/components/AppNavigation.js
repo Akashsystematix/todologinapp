@@ -15,15 +15,30 @@ import UserProfileView from './userModules/UserProfileView'
 import AuthLoadingScreen from './AuthLoadingScreen'
 import { AsyncStorage } from 'react-native'
 
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import {DefaultTheme, TextInput,Provider as PaperProvider } from 'react-native-paper';
 
-const TabStack = createBottomTabNavigator(
+
+
+
+const theme = {
+    ...DefaultTheme,
+    roundness: 2,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: 'red',
+      accent: '#f1c40f',
+    }
+  };
+
+const TabStack = createMaterialBottomTabNavigator(
 
     {
       TodoView: {
         screen: TodoView,
         navigationOptions: {
             tabBarLabel: "Home",
-            tabBarIcon: ({ tintColor }) => (
+            tabBarIcon: () => (
                 <Icon name="home" size={30} color="#6B2E93" />
             )
         },
@@ -32,7 +47,7 @@ const TabStack = createBottomTabNavigator(
       SocialFeed: {
           screen : SocialFeed, navigationOptions: {
             tabBarLabel: "SocialFeed",
-            tabBarIcon: ({ tintColor }) => (
+            tabBarIcon: () => (
                 <Icon name="people" size={30} color="#6B2E93" />
             )
         }
@@ -40,12 +55,9 @@ const TabStack = createBottomTabNavigator(
       },
 
       EventsScreen: {
-        screen: EventsScreen
-        ,
-
-            navigationOptions: {
+        screen: EventsScreen,navigationOptions: {
                 tabBarLabel: "Events",
-                tabBarIcon: ({ tintColor }) => (
+                tabBarIcon: () => (
                     <Icon name="list" size={30} color="#6B2E93" />
                 )
             },
@@ -58,7 +70,7 @@ const TabStack = createBottomTabNavigator(
 
             navigationOptions: {
                 tabBarLabel: "Contacts",
-                tabBarIcon: ({ tintColor }) => (
+                tabBarIcon: () => (
                     <Icon name="contacts" size={30} color="#6B2E93" />
                 )
             },
@@ -78,24 +90,36 @@ const TabStack = createBottomTabNavigator(
       },
 
     },
-    {
-        navigationOptions: ({ navigation }) => {
-          const { routeName } = navigation.state.routes[navigation.state.index];
-          return {
-            headerTitle: routeName
-          };
-        }
-      },
+    // {
+    //     navigationOptions: ({ navigation }) => {
+    //       const { routeName } = navigation.state.routes[navigation.state.index];
+    //       return {
+    //         headerTitle: routeName
+    //       };
+    //     }
+    //   },
+    
     
     {
-      tabBarOptions: {
-        activeTintColor: '#8F2571',
-        inactiveTintColor: 'grey',
-        style: {
-          backgroundColor: '#FFFFFD',
-        }
-      },
-    },
+        activeTintColor:'#8F2571',
+        inactiveColor: 'grey',
+        
+          barStyle: { backgroundColor: '#FFFFFD' },
+          shifting:true,
+          roundness:10,
+          labeled:true,
+          },
+    
+    
+    // {
+    //   tabBarOptions: {
+    //     activeTintColor: '',
+    //     inactiveTintColor: 'grey',
+    //     style: {
+    //       backgroundColor: '#FFFFFD',
+    //     }
+    //   },
+    // },
 )
 
 
@@ -162,6 +186,12 @@ export default class AppNavigation extends Component {
   render() {
 
     
-    return (<AppContainer/>);
+    return (
+        <PaperProvider theme={theme}>
+    
+    <AppContainer/>
+    
+    </PaperProvider>
+    );
   }
 }

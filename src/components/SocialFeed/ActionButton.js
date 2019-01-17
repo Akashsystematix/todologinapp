@@ -13,7 +13,7 @@ export default class ActionButton extends Component {
     return (
       <View style={styles.action}>
 
-<LinearGradient colors={['#394BA4', '#B0A4B4', '#E8CBC0']} direction='ltr' style={styles.linearGradient}>
+<LinearGradient colors={[' #40e0d0', '#ff8c00', '#ff0080']} direction='ltr' style={styles.linearGradient}>
 <TouchableHighlight
           underlayColor={constants.actionColor}
           onPress={this.props.onPress}>
