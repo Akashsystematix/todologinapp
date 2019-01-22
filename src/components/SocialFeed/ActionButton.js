@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ReactNative, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { Text, View, TouchableHighlight } from 'react-native';
 import styles from './styles1';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -13,7 +13,7 @@ export default class ActionButton extends Component {
     return (
       <View style={styles.action}>
 
-<LinearGradient colors={[' #40e0d0', '#ff8c00', '#ff0080']} direction='ltr' style={styles.linearGradient}>
+<LinearGradient colors={['#6470A4', '#E8CBC0']} direction='ltr' style={styles.linearGradient}>
 <TouchableHighlight
           underlayColor={constants.actionColor}
           onPress={this.props.onPress}>

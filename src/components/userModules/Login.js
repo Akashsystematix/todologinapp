@@ -1,85 +1,116 @@
-import React, { Component } from 'react'
-import {
-    StyleSheet, Text, View, Image,
-    TouchableWithoutFeedback, StatusBar, AsyncStorage,
-    TextInput, TouchableOpacity, Dimensions,
+import firebase from 'firebase';
+import React, {Component} from 'react'
+import {AsyncStorage, Dimensions, Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View,
 
-} from 'react-native'
+} from 'react-native';
+import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
+
+import FBSDK, {LoginManager} from 'react-native-fbsdk';
 import LinearGradient from 'react-native-linear-gradient';
 
-
-import firebase from 'firebase';
 import TodoView from '../TodoModules/TodoView';
 
-let { width, height } = Dimensions.get('window')
+let {width, height} = Dimensions.get('window')
 export default class Login extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            user: null,
-            email: '',
-            emailVal: true,
-            password: '',
-            errorMessage: null
-        };
+  constructor(props) {
+    super(props);
+     this.state = {
+      user: null,
+      email: '',
+      emailVal: true,
+      password: '',
+      errorMessage: null
+    };
+  }
+  componentWillMount() {
+    GoogleSignin.hasPlayServices({ autoResolve: true });
+    GoogleSignin.configure({
+      iosClientId: '254737028478-5praik5469qjo8nhatmm57etvd1kaanu.apps.googleusercontent.com',
+      webClientId: '254737028478-qj29v4mtnhl6j9q9p9vkuqn0i8k9br72.apps.googleusercontent.com'
+    })
+  }
+
+  validate(text, type) {
+    this.setState({email: text})
+    alph =
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+
+    if (type == 'email') {
+      if (alph.test(text)) {
+        // this.setState({ email: text })
+        this.setState({
+          emailVal: true,
+
+        })
+
+      } else {
+        this.setState({
+          emailVal: false,
+        })
+        console.warn('invalid email')
+      }
     }
+  }
 
-    validate(text, type) {
-        this.setState({ email: text })
-        alph = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  handleFbLogin =
+      () => {
+        LoginManager.logInWithReadPermissions(['email'])
+            .then(
+                function(result) {
+                  if (result.isCancelled) {
+                    console.log('Login cancelled');
+                  } else {
+                    console.log(
+                        'Login success with permissions: ' +
+                        result.grantedPermissions.toString());
+                  }
+                },
+                function(error) {
+                  console.log('Login fail with error: ' + error);
+                });
+      }
 
 
-        if (type == 'email') {
-            if (alph.test(text)) {
-                // this.setState({ email: text })
-                this.setState({
-                    emailVal: true,
 
-                })
-
-            } else {
-                this.setState({
-                    emailVal: false,
-                })
-                console.warn("invalid email")
-            }
-        }
-    }
-
-    handleLogin = () => {
-        const { email, password } = this.state
-        firebase
-            .auth()
+  handleLogin =
+      () => {
+        const {email, password} = this.state
+        firebase.auth()
             .signInAndRetrieveDataWithEmailAndPassword(email, password)
             .then((userData) => {
-                this.setState({
-                    loading: false
-                });
-                AsyncStorage.setItem('userData', JSON.stringify(userData));
-                console.log("userData=====>" + JSON.stringify(userData));
-                this.props.navigation.navigate("TodoView");
-            }
-            ).catch(error => this.setState({ errorMessage: error.message }))
+              this.setState({loading: false});
+              AsyncStorage.setItem('userData', JSON.stringify(userData));
+              console.log('userData=====>' + JSON.stringify(userData));
+              this.props.navigation.navigate('TodoView');
+            })
+            .catch(error => this.setState({errorMessage: error.message}))
+      }
+      handleSigninGoogle() {
+        GoogleSignin.signIn().then((user) => {
+          console.log(user);
+        }).catch((err) => {
+          console.log('WRONG SIGNIN', err);
+        }).done();
+      }
 
-    }
 
-
-    handleEmail = (text) => {
+  handleEmail =
+      (text) => {
         // this.setState({
         //     email:text})
+      }
 
-    }
 
-
-    render() {
+  render() {
         return (
 
 
             <View style={styles.container}>
                 <LinearGradient colors={['#654ea3', '#eaafc8', '#196666']} style={styles.gradient} >
 
-                    <StatusBar barStyle="light-content" />
+                    <StatusBar barStyle='light-content' />
 
                     <View style={styles.logoContainer}>
                         <View style={styles.logoContainer}>
@@ -93,11 +124,12 @@ export default class Login extends Component {
                                 onChangeText={(text) => this.validate(text, 'email')}
                                 // onChangeText={(text) => this.setState({ email: text })}
                                 // value={this.state.email}
-                                placeholder="Email"
-                                placeholderTextColor='rgba(255,255,255,0.8)'
-                                keyboardType='email-address'
-                                returnKeyType='next'
-                                autoCorrect={false}
+                                placeholder='Email'
+        placeholderTextColor = 'rgba(255,255,255,0.8)'
+        keyboardType = 'email-address'
+        returnKeyType = 'next'
+                                autoCorrect={
+      false}
                             />
                             <TextInput style={styles.input}
                                 placeholder="Password"
@@ -119,10 +151,24 @@ export default class Login extends Component {
                     <View>
                         <Text />
                         {this.state.errorMessage &&
-                            <Text style={{ color: 'red' }}>
+                            <Text style={{
+      color: 'red' }}>
                                 {this.state.errorMessage}
                             </Text>}
                     </View>
+
+                    <GoogleSigninButton
+    style={{ width:100, height: 48 ,alignItems:"center"}}
+    size={GoogleSigninButton.Size.Standard}
+    color={GoogleSigninButton.Color.Dark}
+    onPress={() => this.handleSigninGoogle()}
+    disabled={this.state.isSigninInProgress} />
+
+                    <TouchableOpacity style={styles.buttonContainer}
+                    onPress={() => this.handleFbLogin()} >
+                       {/* onPress={() => this.loginNavigate()} >   */}
+                        <Text style={styles.buttonText}>Facebook IN</Text>
+                    </TouchableOpacity>
 
                     <TouchableOpacity style={styles.buttonContainer}
                     onPress={() => this.handleLogin()} >
@@ -145,85 +191,75 @@ export default class Login extends Component {
     }
 
     registrationNavigate() {
-        this.props.navigation.navigate('Register')
+      this.props.navigation.navigate('Register')
 
     }
     loginNavigate() {
-
-        this.props.navigation.navigate('TodoView')
+      this.props.navigation.navigate('TodoView')
     }
-}
+  }
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: 'column',
+      flex: 1,
+      flexDirection: 'column',
     },
-    logoContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1
-    },
+    logoContainer: {alignItems: 'center', justifyContent: 'center', flex: 1},
     logo: {
-        width: 128,
-        height: 128,
+      width: 128,
+      height: 128,
     },
     title: {
-        color: '#302b63',
-        fontSize: 18,
-        textAlign: 'center',
-        marginTop: 5,
-        fontWeight: 'bold',
-        opacity: 0.9
+      color: '#302b63',
+      fontSize: 18,
+      textAlign: 'center',
+      marginTop: 5,
+      fontWeight: 'bold',
+      opacity: 0.9
     },
     infoContainer: {
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: 200,
-        padding: 20,
-        // backgroundColor: 'red'
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: 200,
+      padding: 20,
+      // backgroundColor: 'red'
     },
     input: {
-        backgroundColor: 'rgba(255,255,255,0.2)',
-        borderColor: '#646FA4',
-        borderWidth: 1,
-        color: 'purple',
-        fontSize: 20,
-        fontWeight: "500",
-        marginTop: 10,
-        opacity: 0.75
+      backgroundColor: 'rgba(255,255,255,0.2)',
+      borderColor: '#646FA4',
+      borderWidth: 1,
+      color: 'purple',
+      fontSize: 20,
+      fontWeight: '500',
+      marginTop: 10,
+      opacity: 0.75
     },
 
     error: {
 
-        borderWidth: 1,
-        borderColor: 'red'
+      borderWidth: 1,
+      borderColor: 'red'
 
 
     },
 
     buttonContainer: {
-        backgroundColor: 'transparent',
-        paddingVertical: 10,
-        left: 0,
-        right: 0,
-        bottom: 0
+      backgroundColor: 'transparent',
+      paddingVertical: 10,
+      left: 0,
+      right: 0,
+      bottom: 0
 
     },
     gradient: {
-        height: height,
-        width: width,
-        flex: 1,
+      height: height,
+      width: width,
+      flex: 1,
 
 
     },
-    buttonText: {
-        textAlign: 'center',
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 13
-    }
-})
-
+    buttonText:
+        {textAlign: 'center', color: 'white', fontWeight: 'bold', fontSize: 13}
+  })
